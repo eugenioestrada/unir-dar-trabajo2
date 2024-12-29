@@ -26,17 +26,15 @@
         <ul class="tasks">
             @foreach (var task in Tasks)
             {
-                <li><input type="checkbox" @bind="task.IsDone" @onchange="_ => { SaveTasks() }"> @task.Title</li>
+                <li><input type="checkbox" checked="@task.IsDone" @onchange="SaveTasks"> @task.Title</li>
             }
         </ul>
     </div>
 
     <div class="col-md-6">
         <h2>Add Task</h2>
-        <form>
-            <input type="text" class="form-control" @bind="newTaskTitle" placeholder="Enter a task title" />
-            <button type="submit" class="btn btn-primary mt-2" @onclick="AddTask">Add Task</button>
-        </form>
+        <input type="text" class="form-control" @bind="newTaskTitle" @onkeypress="OnKeyPress" placeholder="Enter a task title" />
+        <button class="btn btn-primary mt-2" @onclick="AddTask">Add Task</button>
     </div>
 </div>
 
@@ -44,9 +42,12 @@
     private List<ToDoTask> Tasks { get; set; } = new List<ToDoTask>();
     private string? newTaskTitle { get; set; }
 
-    private async Task ChangeTaskStatus(bool isDone)
+    private async Task OnKeyPress(KeyboardEventArgs e)
     {
-        SaveTasks();
+        if (e.Key == "Enter")
+        {
+            AddTask();
+        }
     }
 
     protected override async Task OnInitializedAsync()
