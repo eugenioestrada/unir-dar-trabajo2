@@ -26,7 +26,7 @@
         <ul class="tasks">
             @foreach (var task in Tasks)
             {
-                <li><input type="checkbox" checked="@task.IsDone" @onchange="SaveTasks"> @task.Title  (<button onclick="@DeleteTask(task.Id)">❌</button>)</li>
+                <li><input type="checkbox" checked="@task.IsDone" @onchange="SaveTasks"> @task.Title  (<button @onclick="_ => DeleteTask(task.Id)">❌</button>)</li>
             }
         </ul>
     </div>
@@ -48,7 +48,7 @@
         SaveTasks();
     }
 
-    private async Task OnKeyPress(KeyboardEventArgs e)
+    private void OnKeyPress(KeyboardEventArgs e)
     {
         Console.WriteLine(e.Key);
         if (e.Key == "Enter")
