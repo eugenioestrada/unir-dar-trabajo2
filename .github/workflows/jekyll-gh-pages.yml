@@ -28,13 +28,29 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v3
+
+      - name: Install dependencies
+        working-directory: ./src
+        run: dotnet restore
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./
           destination: ./_site
+
+      - name: Build
+        run: |
+          z  cd DotNet.WebApp
+          dotnet build --configuration Release --no-restore
+          dotnet publish -c Release -o ./_site
+          
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
