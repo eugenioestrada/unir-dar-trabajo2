@@ -45,12 +45,12 @@ jobs:
         run: |
           cd ./src
           dotnet build --configuration Release --no-restore
-          dotnet publish -p:CompressionEnabled=false --output ./publish
+          dotnet publish -p:CompressionEnabled=false
 
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
-          source: ./publish/wwwroot
+          source: ./src/bin/Release/net9.0/wwwroot
           destination: ./_site
 
       - name: Upload artifact
