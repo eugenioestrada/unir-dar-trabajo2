@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using ToDo.Model
+@inject Blazored.LocalStorage.ILocalStorageService localStorage
 
 <PageTitle>Home</PageTitle>
 
@@ -40,6 +41,16 @@
 @code {
     private List<ToDoTask> Tasks { get; set; } = new List<ToDoTask>();
     private string? newTaskTitle { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var tasks = await localStorage.GetItemAsync<List<ToDoTask>>("tasks");
+        if (tasks != null)
+        {
+            Tasks = tasks;
+        }
+    }
+
     private void AddTask()
     {
         if (string.IsNullOrEmpty(newTaskTitle)) {
@@ -48,5 +59,11 @@
 
         Tasks.Add(new ToDoTask { Title = newTaskTitle });
         newTaskTitle = string.Empty;
+        SaveTasks();
+    }
+
+    private void SaveTasks()
+    {
+        localStorage.SetItemAsync("tasks", Tasks);
     }
 }
