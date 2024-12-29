@@ -11,16 +11,24 @@
         list-style-type: none;
         padding: 0;
     }
+    
     .tasks li {
         padding: 0.5rem;
         border-bottom: 1px solid #ccc;
+        display: flex;
+        flex-direction: row;
+        align-content: center;
+        justify-content: space-between;
+        align-items: center;
     }
+
     .tasks li:last-child {
         border-bottom: none;
     }
 
     .btn-delete {
         padding: 5px;
+        cursor: pointer;
     }
 </style>
 
@@ -30,7 +38,7 @@
         <ul class="tasks">
             @foreach (var task in Tasks.Where(t => !t.IsDone))
             {
-                <li><input type="checkbox" checked="@task.IsDone" @onchange="_ => ChangeTaskStatus(task)"> @task.Title  (<span class="btn-delete" @onclick="_ => DeleteTask(task.Id)">❌</span>)</li>
+                <li><input type="checkbox" checked="@task.IsDone" @onchange="_ => ChangeTaskStatus(task)"> <span class="task-title">@task.Title</span> <span class="btn-delete" @onclick="_ => DeleteTask(task.Id)">❌</span></li>
             }
         </ul>
 
@@ -38,7 +46,7 @@
         <ul class="tasks">
             @foreach (var task in Tasks.Where(t => t.IsDone))
             {
-                <li><input type="checkbox" checked="@task.IsDone" @onchange="_ => ChangeTaskStatus(task)"> @task.Title  (<span class="btn-delete" @onclick="_ => DeleteTask(task.Id)">❌</span>)</li>
+                <li><input type="checkbox" checked="@task.IsDone" @onchange="_ => ChangeTaskStatus(task)"> <span class="task-title">@task.Title</span> <span class="btn-delete" @onclick="_ => DeleteTask(task.Id)">❌</span></li>
             }
         </ul>
     </div>
