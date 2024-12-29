@@ -49,7 +49,7 @@ jobs:
 
       - name: Build
         run: |
-          z  cd DotNet.WebApp
+          cd ./src
           dotnet build --configuration Release --no-restore
           dotnet publish -c Release -o ./_site
 
