@@ -45,7 +45,7 @@ jobs:
         run: |
           cd ./src
           dotnet build --configuration Release --no-restore
-          dotnet publish -p:CompressionEnabled=false -o ./publish
+          dotnet publish -p:CompressionEnabled=false ---output ./publish
 
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
