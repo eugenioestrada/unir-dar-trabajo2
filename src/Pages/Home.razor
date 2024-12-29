@@ -35,6 +35,10 @@
         width: 100%;
         margin-left: 10px;
     }
+
+    .completed {
+        color: gray;
+    }
 </style>
 
 <div class="row">
@@ -59,7 +63,7 @@
         <h2>Completed tasks</h2>
         @if (Tasks.Any(t => t.IsDone))
         {
-            <ul class="tasks">
+            <ul class="tasks completed">
                 @foreach (var task in Tasks.Where(t => t.IsDone))
                 {
                     <li><input type="checkbox" checked="@task.IsDone" @onchange="_ => ChangeTaskStatus(task)"> <span
