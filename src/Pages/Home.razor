@@ -26,7 +26,7 @@
         <ul class="tasks">
             @foreach (var task in Tasks)
             {
-                <li><input type="checkbox" checked="@task.IsDone" @onchange="SaveTasks"> @task.Title  (<button @onclick="_ => DeleteTask(task.Id)">❌</button>)</li>
+                <li><input type="checkbox" checked="@task.IsDone" @onchange="_ => ChangeTaskStatus(task)"> @task.Title  (<button @onclick="_ => DeleteTask(task.Id)">❌</button>)</li>
             }
         </ul>
     </div>
@@ -45,6 +45,12 @@
     private void DeleteTask(string id)
     {
         Tasks.RemoveAll(t => t.Id == id);
+        SaveTasks();
+    }
+
+    private void ChangeTaskStatus(ToDoTask task)
+    {
+        task.IsDone = !task.IsDone;
         SaveTasks();
     }
 
