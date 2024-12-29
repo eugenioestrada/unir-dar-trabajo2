@@ -7,13 +7,27 @@
 
 Welcome to your new app.
 
+<style>
+    .tasks {
+        list-style-type: none;
+        padding: 0;
+    }
+    .tasks li {
+        padding: 0.5rem;
+        border-bottom: 1px solid #ccc;
+    }
+    .tasks li:last-child {
+        border-bottom: none;
+    }
+</style>
+
 <div class="row">
     <div class="col-md-6">
         <h2>Tasks</h2>
-        <ul>
+        <ul class="tasks">
             @foreach (var task in Tasks)
             {
-                <li>@task.Title</li>
+                <li><input type="checkbox" @bind="task.IsDone"> @task.Title</li>
             }
         </ul>
     </div>
