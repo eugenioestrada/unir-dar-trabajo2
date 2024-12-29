@@ -26,7 +26,7 @@
         <ul class="tasks">
             @foreach (var task in Tasks)
             {
-                <li><input type="checkbox" checked="@task.IsDone" @onchange="SaveTasks"> @task.Title</li>
+                <li><input type="checkbox" checked="@task.IsDone" @onchange="SaveTasks"> @task.Title  (<button onclick="@DeleteTask(task.Id)">❌</button>)</li>
             }
         </ul>
     </div>
@@ -41,6 +41,12 @@
 @code {
     private List<ToDoTask> Tasks { get; set; } = new List<ToDoTask>();
     private string? newTaskTitle { get; set; }
+
+    private void DeleteTask(string id)
+    {
+        Tasks.RemoveAll(t => t.Id == id);
+        SaveTasks();
+    }
 
     private async Task OnKeyPress(KeyboardEventArgs e)
     {
