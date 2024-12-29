@@ -67,8 +67,7 @@
                 @foreach (var task in Tasks.Where(t => t.IsDone))
                 {
                     <li><input type="checkbox" checked="@task.IsDone" @onchange="_ => ChangeTaskStatus(task)"> <span
-                            class="task-title">@task.Title</span> <span class="btn-delete"
-                            @onclick="_ => DeleteTask(task.Id)">❌</span></li>
+                            class="task-title">@task.Title</span></li>
                 }
             </ul>
         }
