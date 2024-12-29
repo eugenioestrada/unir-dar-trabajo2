@@ -41,17 +41,17 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
-        with:
-          source: ./
-          destination: ./_site
-
       - name: Build
         run: |
           cd ./src
           dotnet build --configuration Release --no-restore
-          dotnet publish -c Release -o ./_site
+          dotnet publish -c Release -o ./publish
+
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./publish/wwwroot
+          destination: ./_site
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
