@@ -50,7 +50,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./src/bin/Release/net9.0/wwwroot
+          path: ./src/bin/Release/net9.0/publish/wwwroot
 
   # Deployment job
   deploy:
