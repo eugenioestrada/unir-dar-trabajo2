@@ -31,6 +31,8 @@ jobs:
 
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'
 
       - name: Install dependencies
         working-directory: ./src
@@ -50,7 +52,7 @@ jobs:
           z  cd DotNet.WebApp
           dotnet build --configuration Release --no-restore
           dotnet publish -c Release -o ./_site
-          
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
