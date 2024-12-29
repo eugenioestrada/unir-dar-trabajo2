@@ -24,7 +24,7 @@
     <div class="col-md-6">
         <h2>Tasks</h2>
         <ul class="tasks">
-            @foreach (var task in Tasks)
+            @foreach (var task in Tasks.OrderBy(t => t.IsDone))
             {
                 <li><input type="checkbox" checked="@task.IsDone" @onchange="_ => ChangeTaskStatus(task)"> @task.Title  (<button @onclick="_ => DeleteTask(task.Id)">❌</button>)</li>
             }
@@ -32,7 +32,7 @@
     </div>
 
     <div class="col-md-6">
-        <h2>Add Task</h2>
+        <h2>New task</h2>
         <input type="text" class="form-control" @bind="newTaskTitle" @onkeypress="OnKeyPress" placeholder="Enter a task title" />
         <button class="btn btn-primary mt-2" @onclick="AddTask">Add Task</button>
     </div>
